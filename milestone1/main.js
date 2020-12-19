@@ -1,17 +1,15 @@
 var app = new Vue({
-    el: '#root',
+    el: '#AppRoot',
     data: {
         user: {
             name: 'FraDev',
             avatar: '_io'
         },
-        contacts: [
-            {
+        contacts: [{
                 name: 'Franco',
                 avatar: '_3',
                 visible: true,
-                messages: [
-                    {
+                messages: [{
                         date: '10/01/2020 15:30:55',
                         message: 'Hai portato a spasso il cane?',
                         status: 'sent'
@@ -32,8 +30,7 @@ var app = new Vue({
                 name: 'Serena',
                 avatar: '_2',
                 visible: true,
-                messages: [
-                    {
+                messages: [{
                         date: '20/03/2020 16:30:00',
                         message: 'Ciao come stai?',
                         status: 'sent'
@@ -54,8 +51,7 @@ var app = new Vue({
                 name: 'Judy',
                 avatar: '_6',
                 visible: true,
-                messages: [
-                    {
+                messages: [{
                         date: '28/03/2020 10:10:40',
                         message: 'La Marianna va in campagna',
                         status: 'received'
@@ -76,8 +72,7 @@ var app = new Vue({
                 name: 'Emanuele',
                 avatar: '_4',
                 visible: true,
-                messages: [
-                    {
+                messages: [{
                         date: '10/01/2020 15:30:55',
                         message: 'Lo sai che ha aperto una nuova pizzeria?',
                         status: 'sent'
@@ -89,7 +84,7 @@ var app = new Vue({
                     }
                 ],
             },
-       
+
         ]
     },
     methods: {}
