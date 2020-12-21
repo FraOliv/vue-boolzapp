@@ -1,6 +1,7 @@
 var app = new Vue({
     el: '#AppRoot',
     data: {
+        active_contact: 0,
         user: {
             name: 'FraDev',
             avatar: '_io'
@@ -88,8 +89,11 @@ var app = new Vue({
         ]
     },
    methods: {
-    switch_active_chat(chat_index) {
-        this.active_contact = chat_index;
+        switch_active_contact(index) {
+            this.active_contact = index;
+        }
+    },
+    mounted: function() {
+        // console.log(this.contacts[0].messages[0].message);
     }
-},
 });

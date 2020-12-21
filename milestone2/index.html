@@ -39,17 +39,20 @@
                     <input id="contacts-filter" class="left-searchbar-input" placeholder="Search"
                            name="search">
                 </div>
-                <div class="contacts">
-                    <div class="contact" v-for="contact in contacts">
+             <div class="contacts">
+                    <div class="contact"
+                        v-for="(contact, index) in contacts"
+                        @click="switch_active_contact(index)"
+                        :class="index == active_contact ? 'active' : ''">
                         <div class="contact-logo">
                             <img :src="'img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
                         </div>
                         <div class="contact-info">
                             <h3>
                                 <span class="contact-name">{{ contact.name }}</span>
+                                <span class="time f-right">12:00</span>
                             </h3>
-                     
-                  
+                            <small>Ultimo messaggio inviato</small>
                         </div>
                     </div>
                 </div>
@@ -58,13 +61,15 @@
             <div class="right">
                 <div class="nav-right">
                     <div class="nav-right-logo">
-                        <img src="img/avatar_8.jpg" alt="">
+                  <img :src="'img/avatar' + contacts[active_contact].avatar + '.jpg'" alt="">
                         <h3>
-                            <span id="nav-right-contact-name">
-                                Rodolfo
+                            <span id="header-right-contact-name">
+                                {{ contacts[active_contact].name }}
                             </span>
                             <br>
-                            
+                            <small class="time">
+                            </small>
+                            Ultimo accesso oggi alle 4:35
                         </h3>
                     </div>
                     <div class="nav-right-icons">
@@ -73,9 +78,16 @@
                         <i class="fas fa-ellipsis-v"></i>
                     </div>
                 </div>
-                <div class="right-messages-container">
+               <div class="right-messages-container">
                     <div class="right-messages">
-                        
+                        <div
+                            v-for="oggetto_messaggio in contacts[active_contact].messages"  class="message" :class="oggetto_messaggio.status">
+                            <span class="message-text">
+                                {{ oggetto_messaggio.message }}
+                            </span>
+                            <span class="message-time">12:00</span>
+                         
+                        </div>
                     </div>
                 </div>
                 <div class="right-footer">
