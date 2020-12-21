@@ -2,6 +2,7 @@ var app = new Vue({
     el: '#AppRoot',
     data: {
         active_contact: 0,
+        nuovo_messaggio: '',
         user: {
             name: 'FraDev',
             avatar: '_io'
@@ -85,15 +86,132 @@ var app = new Vue({
                     }
                 ],
             },
+             {
+                name: 'Alessandro L.',
+                avatar: '_5',
+                visible: true,
+                messages: [
+                    {
+                        date: '10/01/2020 15:30:55',
+                        message: 'Ricordati di chiamare la nonna',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 15:50:00',
+                        message: 'Va bene, stasera la sento',
+                        status: 'received'
+                    }
+                ],
+            },
+             {
+                name: 'Claudia',
+                avatar: '_6',
+                visible: true,
+                messages: [
+                    {
+                        date: '10/01/2020 15:30:55',
+                        message: 'Ciao Claudia, hai novità?',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 15:50:00',
+                        message: 'Non ancora',
+                        status: 'received'
+                    },
+                    {
+                        date: '10/01/2020 15:51:00',
+                        message: 'Nessuna nuova, buona nuova',
+                        status: 'sent'
+                    }
+                ],
+            },
+             {
+                name: 'Federico',
+                avatar: '_7',
+                visible: true,
+                messages: [
+                    {
+                        date: '10/01/2020 15:30:55',
+                        message: 'Fai gli auguri a Martina che è il suo compleanno!',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 15:50:00',
+                        message: 'Grazie per avermelo ricordato, le scrivo subito!',
+                        status: 'received'
+                    }
+                ],
+            },
+               {
+                name: 'Davide',
+                avatar: '_8',
+                visible: true,
+                messages: [
+                    {
+                        date: '10/01/2020 15:30:55',
+                        message: 'Ciao, andiamo a mangiare la pizza stasera?',
+                        status: 'received'
+                    },
+                    {
+                        date: '10/01/2020 15:50:00',
+                        message: 'No, l\'ho già mangiata ieri, ordiniamo sushi!',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 15:51:00',
+                        message: 'OK!!',
+                        status: 'received'
+                    }
+                ],
+            }
+            
 
         ]
     },
    methods: {
         switch_active_contact(index) {
             this.active_contact = index;
+        },
+         send_new_message() {
+            // recupero il testo digitato e creo un nuovo messaggio, cioè un oggetto
+            let nuovo_messaggio_object = {
+                date: '17/11/2020 09:57',
+                message: this.nuovo_messaggio,
+                status: 'sent'
+            };
+            let current_chat = this.contacts[this.active_contact].messages; 
+            current_chat.push(nuovo_messaggio_object);
+            // rreset input
+            this.nuovo_messaggio = '';
+
+            this.autoscroll();
+
+            // risposta del pc
+            setTimeout(function() {
+                // creo un nuovo oggetto
+                //oggetto pc message
+                let pc_messsage = {
+                    date: '17/11/2020 09:57',
+                    message: 'ok',
+                    status: 'received'
+                };
+                // inserisco l'oggetto della risposta nell'array dei messaggi della conversazione corrente
+                current_chat.push(pc_messsage);
+
+                AppRoot.autoscroll();
+
+            }, 1000);
+
+        },
+        autoscroll() {
+        
+            Vue.nextTick(function() {
+                let chat_container = document.querySelector('right-messages')[0];
+                chat_container.scrollTop = chat_container.scrollHeight;
+            });
         }
     },
-    mounted: function() {
-        // console.log(this.contacts[0].messages[0].message);
-    }
+    created: function() {
+        this.autoscroll();
+    },
 });
