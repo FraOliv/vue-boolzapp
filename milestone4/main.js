@@ -1,10 +1,11 @@
+dayjs.extend(window.dayjs_plugin_customParseFormat);
+
 var app = new Vue({
     el: '#AppRoot',
     data: {
-        active_contact: 0,
+       active_contact: 0,
         nuovo_messaggio: '',
-         new_message: '',
-   
+        search_text: '',
         user: {
             name: 'FraDev',
             avatar: '_io'
@@ -170,11 +171,12 @@ var app = new Vue({
 
         ]
     },
-   methods: {
-        switch_active_contact(index) {
-            this.active_contact = index;
+    methods: {
+        switch_active_contact(contact_index) {
+            this.active_contact = contact_index;
+            this.autoscroll();
         },
-         send_new_message() {
+       send_new_message() {
         
             let nuovo_messaggio_object = {
                 date: '17/11/2020 09:57',
@@ -205,15 +207,26 @@ var app = new Vue({
 
         },
         autoscroll() {
-        
+            // faccio scroll della finestra dei messaggi
             Vue.nextTick(function() {
-                let chat_container = document.querySelector('right-messages')[0];
+                let chat_container = document.getElementsByClassName('right-messages')[0];
                 chat_container.scrollTop = chat_container.scrollHeight;
             });
         },
-        
+        search() {
+            this.contacts.forEach((contact) => {
+                let contact_name = contact.name.toLowerCase();
+                let searched_name = this.search_text.toLowerCase();
+                if(contact_name.includes(searched_name)) {
+                    contact.visible = true;
+                } else {
+                    contact.visible = false;
+                }
+            });
+        },
+    
     },
-    created: function() {
+    mounted: function() {
         this.autoscroll();
     },
 });
