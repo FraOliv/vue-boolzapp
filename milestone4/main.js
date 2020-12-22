@@ -177,12 +177,12 @@ var app = new Vue({
         },
        send_new_message() {
         
-            let nuovo_messaggio_object = {
+            var nuovo_messaggio_object = {
                 date: '17/11/2020 09:57',
                 message: this.nuovo_messaggio,
                 status: 'sent'
             };
-            let current_chat = this.contacts[this.active_contact].messages; 
+            var current_chat = this.contacts[this.active_contact].messages; 
             current_chat.push(nuovo_messaggio_object);
             // rreset input
             this.nuovo_messaggio = '';
@@ -193,7 +193,7 @@ var app = new Vue({
             setTimeout(function() {
                 // creo un nuovo oggetto
                 //oggetto pc message
-                let pc_messsage = {
+                var pc_messsage = {
                     date: '17/11/2020 09:57',
                     message: 'ok',
                     status: 'received'
@@ -208,14 +208,14 @@ var app = new Vue({
         autoscroll() {
             // faccio scroll della finestra dei messaggi
             Vue.nextTick(function() {
-                let chat_container = document.getElementsByClassName('right-messages')[0];
+                var chat_container = document.getElementsByClassName('right-messages')[0];
                 chat_container.scrollTop = chat_container.scrollHeight;
             });
         },
         search() {
             this.contacts.forEach((contact) => {
-                let contact_name = contact.name.toLowerCase();
-                let searched_name = this.search_text.toLowerCase();
+                var contact_name = contact.name.toLowerCase();
+                var searched_name = this.search_text.toLowerCase();
                 if(contact_name.includes(searched_name)) {
                     contact.visible = true;
                 } else {
