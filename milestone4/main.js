@@ -1,4 +1,3 @@
-dayjs.extend(window.dayjs_plugin_customParseFormat);
 
 var app = new Vue({
     el: '#AppRoot',
